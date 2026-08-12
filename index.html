@@ -1,1 +1,882 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>YogaVerse AI</title><style>body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#eefaf4,#fff)}header{padding:18px 8%;display:flex;justify-content:space-between}nav a{text-decoration:none;color:#333;margin-left:20px}section{padding:80px 8%;display:flex;justify-content:space-between;align-items:center;min-height:70vh}.hero{max-width:600px}h1{font-size:52px;color:#1f5134}p{font-size:20px;color:#555}.btn{display:inline-block;background:#2f855a;color:#fff;padding:14px 26px;border-radius:30px;text-decoration:none;margin-top:20px}.card{background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}.chat{position:fixed;right:25px;bottom:25px;width:64px;height:64px;border-radius:50%;background:#2f855a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.25)}</style></head><body><header><h2>YogaVerse AI</h2><nav><a href='#'>Home</a><a href='#'>Features</a><a href='#'>Instructors</a></nav></header><section><div class='hero'><h1>Your AI Wellness Coach</h1><p>Discover personalized yoga routines, AI-powered wellness assessments, and the perfect instructor for your health goals.</p><a class='btn' href='#'>Start Free Assessment</a></div><div class='card'><h3>AI Assessment</h3><p>✔ Wellness Score<br>✔ Personalized Yoga Plan<br>✔ Instructor Matching<br>✔ Daily Routine</p></div></section><a class='chat' href='#' title='Chat with AI'>💬</a></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YogaVerse AI — Your Personalized Yoga Journey</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+  :root {
+    --bg: oklch(97% 0.008 155);
+    --bg-warm: oklch(95% 0.012 85);
+    --surface: oklch(99% 0.004 155);
+    --fg: oklch(18% 0.015 155);
+    --fg-secondary: oklch(42% 0.012 155);
+    --fg-tertiary: oklch(58% 0.010 155);
+    --green: oklch(42% 0.10 160);
+    --green-light: oklch(92% 0.04 160);
+    --green-dark: oklch(28% 0.08 160);
+    --terracotta: oklch(58% 0.14 45);
+    --terracotta-light: oklch(92% 0.04 45);
+    --cream: oklch(95% 0.015 85);
+    --cream-deep: oklch(90% 0.025 85);
+    --border: oklch(88% 0.008 155);
+    --font-display: 'DM Serif Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-optical-sizing: auto;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+    line-height: 1.15;
+  }
+
+  p { text-wrap: pretty; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: oklch(97% 0.008 155 / 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: box-shadow 0.3s var(--ease-out);
+  }
+  nav.scrolled { box-shadow: 0 1px 0 var(--border); }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--green-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo .logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--surface);
+    font-size: 18px;
+    font-family: var(--font-body);
+    font-weight: 700;
+  }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--fg-secondary);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-cta {
+    background: var(--green) !important;
+    color: var(--surface) !important;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-weight: 600 !important;
+    transition: transform 0.2s var(--ease-out), background 0.2s;
+  }
+  .nav-cta:hover { transform: scale(1.03); background: var(--green-dark) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    gap: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, oklch(90% 0.06 160 / 0.3), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    color: var(--green);
+    font-style: italic;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--fg-secondary);
+    max-width: 52ch;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-primary {
+    background: var(--green);
+    color: var(--surface);
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-out), background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { transform: scale(1.03); background: var(--green-dark); }
+  .btn-ghost {
+    color: var(--fg-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 8px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--fg); }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .assessment-preview {
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 24px 80px oklch(20% 0.02 155 / 0.08), 0 2px 8px oklch(20% 0.02 155 / 0.04);
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .ap-header {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+    color: var(--fg);
+  }
+  .ap-sub { font-size: 0.85rem; color: var(--fg-tertiary); margin-bottom: 28px; }
+  .ap-field { margin-bottom: 16px; }
+  .ap-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--fg-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .ap-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ap-pill {
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .ap-pill.active {
+    background: var(--green);
+    color: var(--surface);
+    border-color: var(--green);
+  }
+  .ap-pill:hover:not(.active) { border-color: var(--green); color: var(--green); }
+  .ap-progress {
+    margin-top: 28px;
+    height: 4px;
+    background: var(--green-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .ap-progress-bar {
+    height: 100%;
+    width: 33%;
+    background: var(--green);
+    border-radius: 4px;
+    transition: width 0.5s var(--ease-out);
+  }
+  .floating-card {
+    position: absolute;
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 16px 20px;
+    box-shadow: 0 12px 40px oklch(20% 0.02 155 / 0.1);
+    z-index: 3;
+    animation: float 6s ease-in-out infinite;
+  }
+  .fc-score { top: 20px; right: -40px; }
+  .fc-score .score-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--green);
+  }
+  .fc-score .score-label { font-size: 0.75rem; color: var(--fg-tertiary); }
+  .fc-match { bottom: 40px; left: -30px; }
+  .fc-match-inner { display: flex; align-items: center; gap: 10px; }
+  .fc-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+  .fc-match-text .fc-name { font-size: 0.85rem; font-weight: 600; color: var(--fg); }
+  .fc-match-text .fc-spec { font-size: 0.72rem; color: var(--fg-tertiary); }
+  .fc-match-badge {
+    margin-top: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--green);
+    background: var(--green-light);
+    padding: 3px 10px;
+    border-radius: 100px;
+    display: inline-block;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* SOCIAL PROOF BAR */
+  .proof-bar {
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .proof-item { text-align: center; }
+  .proof-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--fg);
+    font-variant-numeric: tabular-nums;
+  }
+  .proof-label { font-size: 0.78rem; color: var(--fg-tertiary); margin-top: 2px; }
+
+  /* HOW IT WORKS */
+  .how-section { padding: 120px 48px; }
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--terracotta);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--fg);
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--fg-secondary);
+    max-width: 55ch;
+    margin-bottom: 64px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    counter-reset: step;
+  }
+  .step {
+    counter-increment: step;
+    position: relative;
+  }
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--green-light);
+    display: block;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+  .step h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--fg); }
+  .step p {
+    font-size: 0.95rem;
+    color: var(--fg-secondary);
+    max-width: 38ch;
+    line-height: 1.65;
+  }
+  .step-connector {
+    position: absolute;
+    top: 30px;
+    right: -24px;
+    width: 48px;
+    height: 2px;
+    background: var(--border);
+  }
+  .step:last-child .step-connector { display: none; }
+
+  /* FEATURES */
+  .features-section {
+    padding: 120px 48px;
+    background: var(--cream);
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 64px;
+  }
+  .feature {
+    background: var(--surface);
+    padding: 44px 40px;
+    border-radius: 20px;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .feature:hover { transform: translateY(-4px); }
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+  .fi-green { background: var(--green-light); }
+  .fi-terra { background: var(--terracotta-light); }
+  .fi-cream { background: var(--cream-deep); }
+  .feature h3 { font-size: 1.3rem; margin-bottom: 10px; }
+  .feature p {
+    font-size: 0.92rem;
+    color: var(--fg-secondary);
+    line-height: 1.65;
+    max-width: 48ch;
+  }
+
+  /* INSTRUCTORS */
+  .instructors-section { padding: 120px 48px; }
+  .instructor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+  }
+  .instructor {
+    text-align: center;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .instructor:hover { transform: translateY(-6px); }
+  .instructor-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: var(--green-light);
+  }
+  .instructor h3 { font-size: 1.25rem; margin-bottom: 4px; }
+  .instructor-spec {
+    font-size: 0.85rem;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .instructor-exp { font-size: 0.82rem; color: var(--fg-tertiary); }
+  .instructor-match {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--green);
+    background: var(--green-light);
+    padding: 5px 14px;
+    border-radius: 100px;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials-section {
+    padding: 120px 48px;
+    background: var(--green-dark);
+    color: var(--surface);
+  }
+  .testimonials-section .section-tag { color: oklch(75% 0.08 160); }
+  .testimonials-section .section-title { color: oklch(96% 0.005 155); }
+  .testimonials-section .section-sub { color: oklch(72% 0.01 155); }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 64px;
+  }
+  .testimonial {
+    background: oklch(24% 0.06 155);
+    padding: 36px 32px;
+    border-radius: 20px;
+  }
+  .testimonial-stars {
+    font-size: 0.85rem;
+    color: oklch(78% 0.16 85);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+  .testimonial-quote {
+    font-size: 0.95rem;
+    color: oklch(82% 0.008 155);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .ta-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: oklch(35% 0.06 160);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: oklch(80% 0.04 160);
+    font-weight: 600;
+  }
+  .ta-name { font-size: 0.88rem; font-weight: 600; color: oklch(92% 0.005 155); }
+  .ta-detail { font-size: 0.75rem; color: oklch(58% 0.01 155); }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, oklch(90% 0.06 160 / 0.25), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cta-section .section-title {
+    margin-bottom: 20px;
+    max-width: 20ch;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  .cta-section .section-sub {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .cta-section .btn-primary { position: relative; }
+
+  /* FOOTER */
+  footer {
+    padding: 64px 48px 40px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-brand .nav-logo { margin-bottom: 16px; }
+  .footer-brand p {
+    font-size: 0.85rem;
+    color: var(--fg-tertiary);
+    max-width: 35ch;
+    line-height: 1.6;
+  }
+  .footer-col h4 {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fg-secondary);
+    margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--fg-tertiary);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: var(--fg); }
+  .footer-bottom {
+    padding: 24px 48px;
+    font-size: 0.78rem;
+    color: var(--fg-tertiary);
+    text-align: center;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding: 140px 32px 80px; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { display: none; }
+    .steps { grid-template-columns: 1fr; gap: 40px; }
+    .step-connector { display: none; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .instructor-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .proof-bar { flex-wrap: wrap; gap: 32px; }
+    footer { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero { padding: 120px 20px 60px; }
+    .how-section, .features-section, .instructors-section, .testimonials-section, .cta-section { padding: 80px 20px; }
+    .instructor-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
+  }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <span class="logo-mark">Y</span>
+    YogaVerse AI
+  </a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#instructors">Instructors</a>
+    <a href="#start" class="nav-cta">Start Assessment</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">AI-Powered Wellness</div>
+    <h1>Discover your <em>perfect</em> yoga journey</h1>
+    <p class="hero-sub">Take a 2-minute AI wellness assessment. Get a personalized yoga plan, matched to the right instructor for your goals, body, and lifestyle.</p>
+    <div class="hero-actions">
+      <a href="#start" class="btn-primary">Start Free Assessment &rarr;</a>
+      <a href="#how" class="btn-ghost">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="assessment-preview">
+      <div class="ap-header">Wellness Assessment</div>
+      <div class="ap-sub">Step 2 of 6: What's your primary goal?</div>
+      <div class="ap-field">
+        <span class="ap-label">Select your goal</span>
+        <div class="ap-pills">
+          <button class="ap-pill">Stress Relief</button>
+          <button class="ap-pill active">Flexibility</button>
+          <button class="ap-pill">Better Sleep</button>
+          <button class="ap-pill">Back Pain</button>
+          <button class="ap-pill">Weight</button>
+          <button class="ap-pill">Spiritual</button>
+        </div>
+      </div>
+      <div class="ap-progress"><div class="ap-progress-bar"></div></div>
+    </div>
+    <div class="floating-card fc-score" style="animation-delay: -1s;">
+      <div class="score-num">87</div>
+      <div class="score-label">Wellness Score</div>
+    </div>
+    <div class="floating-card fc-match" style="animation-delay: -3s;">
+      <div class="fc-match-inner">
+        <div class="fc-avatar">&#129495;</div>
+        <div class="fc-match-text">
+          <div class="fc-name">Meera Patel</div>
+          <div class="fc-spec">Hatha &amp; Therapeutic</div>
+        </div>
+      </div>
+      <div class="fc-match-badge">94% match</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<div class="proof-bar">
+  <div class="proof-item"><div class="proof-num">300+</div><div class="proof-label">Assessments completed</div></div>
+  <div class="proof-item"><div class="proof-num">15+</div><div class="proof-label">Certified instructors</div></div>
+  <div class="proof-item"><div class="proof-num">94%</div><div class="proof-label">Recommendation satisfaction</div></div>
+  <div class="proof-item"><div class="proof-num">4.8/5</div><div class="proof-label">AI response quality</div></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-tag reveal">How it works</div>
+  <h2 class="section-title reveal">Three steps to your personalized practice</h2>
+  <p class="section-sub reveal">No guessing, no generic routines. YogaVerse AI understands your unique situation and connects you with exactly what you need.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <span class="step-connector"></span>
+      <h3>Assess</h3>
+      <p>Answer questions about your goals, lifestyle, experience, and any health considerations. Takes 2 minutes.</p>
+    </div>
+    <div class="step reveal">
+      <span class="step-connector"></span>
+      <h3>Personalize</h3>
+      <p>Our AI analyzes your profile and generates a tailored yoga plan with the right style, pace, and focus areas for you.</p>
+    </div>
+    <div class="step reveal">
+      <h3>Connect</h3>
+      <p>Get matched with an instructor whose specialization, teaching style, and experience align with your needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="section-tag reveal">What makes us different</div>
+  <h2 class="section-title reveal">Not another yoga app.<br>An intelligent wellness platform.</h2>
+  <div class="feature-grid">
+    <div class="feature reveal">
+      <div class="feature-icon fi-green">&#127919;</div>
+      <h3>Deep Wellness Assessment</h3>
+      <p>Goes beyond "pick your goal." We factor in your sleep quality, stress levels, occupation, health conditions, and yoga tradition preferences to build a truly personal plan.</p>
+    </div>
+    <div class="feature reveal">
+      <div class="feature-icon fi-terra">&#129504;</div>
+      <h3>Brand-Specific AI Coach</h3>
+      <p>Trained on your instructor's actual methodology, not generic internet yoga advice. Answers reflect real teaching philosophy, not chatbot filler.</p>
+    </div>
+    <div class="feature reveal">
+      <div class="feature-icon fi-cream">&#129309;</div>
+      <h3>Intelligent Instructor Matching</h3>
+      <p>Our algorithm scores compatibility across goals, specialization, teaching style, language, availability, and price to find your ideal guide.</p>
+    </div>
+    <div class="feature reveal">
+      <div class="feature-icon fi-green">&#128202;</div>
+      <h3>Adaptive Recommendations</h3>
+      <p>Your plan evolves with you. After each session, a quick check-in refines your next recommendation based on how you felt and what you need.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section class="instructors-section" id="instructors">
+  <div class="section-tag reveal">Our instructors</div>
+  <h2 class="section-title reveal">Matched to you, not chosen at random</h2>
+  <p class="section-sub reveal">Every instructor on YogaVerse AI is verified, profiled in depth, and matched to students using AI. No more guessing from a grid of headshots.</p>
+  <div class="instructor-grid">
+    <div class="instructor reveal">
+      <div class="instructor-photo">&#129495;&#8205;&#9792;&#65039;</div>
+      <h3>Rachna Shah</h3>
+      <div class="instructor-spec">Holistic Wellness &amp; Pranayama</div>
+      <div class="instructor-exp">12+ years &middot; Ahmedabad</div>
+      <div class="instructor-match">Best for: stress relief, beginners</div>
+    </div>
+    <div class="instructor reveal">
+      <div class="instructor-photo">&#129495;</div>
+      <h3>Meera Patel</h3>
+      <div class="instructor-spec">Hatha &amp; Therapeutic Yoga</div>
+      <div class="instructor-exp">8+ years &middot; Ahmedabad</div>
+      <div class="instructor-match">Best for: back pain, flexibility</div>
+    </div>
+    <div class="instructor reveal">
+      <div class="instructor-photo">&#129495;&#8205;&#9794;&#65039;</div>
+      <h3>Arjun Desai</h3>
+      <div class="instructor-spec">Ashtanga &amp; Power Yoga</div>
+      <div class="instructor-exp">6+ years &middot; Mumbai</div>
+      <div class="instructor-match">Best for: fitness, weight management</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-tag reveal">What students say</div>
+  <h2 class="section-title reveal">Real people, real journeys</h2>
+  <p class="section-sub reveal">These are pilot results from students who completed the AI wellness assessment.</p>
+  <div class="testimonial-grid">
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">&starf;&starf;&starf;&starf;&starf;</div>
+      <div class="testimonial-quote">"I've watched hundreds of YouTube yoga videos and never stuck with any. The assessment asked me things no app ever did, and the plan it gave me actually made sense for my schedule."</div>
+      <div class="testimonial-author">
+        <div class="ta-avatar">P</div>
+        <div><div class="ta-name">Priya K.</div><div class="ta-detail">Software Engineer, Bengaluru</div></div>
+      </div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">&starf;&starf;&starf;&starf;&starf;</div>
+      <div class="testimonial-quote">"Being matched with Meera was a game-changer. She specializes in exactly what I need for my back issues, and I would never have found her on my own."</div>
+      <div class="testimonial-author">
+        <div class="ta-avatar">A</div>
+        <div><div class="ta-name">Arjun M.</div><div class="ta-detail">Banker, Mumbai</div></div>
+      </div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">&starf;&starf;&starf;&starf;&starf;</div>
+      <div class="testimonial-quote">"As an instructor, I spent hours answering the same questions. The AI coach handles that now, and it actually sounds like my teaching philosophy. My students love it."</div>
+      <div class="testimonial-author">
+        <div class="ta-avatar">R</div>
+        <div><div class="ta-name">Rachna S.</div><div class="ta-detail">Yoga Instructor, Ahmedabad</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="start">
+  <div class="section-tag reveal">Ready?</div>
+  <h2 class="section-title reveal">Your yoga journey starts with a 2-minute assessment</h2>
+  <p class="section-sub reveal">No sign-up required. Get your personalized wellness score, yoga plan, and instructor match for free.</p>
+  <a href="#" class="btn-primary reveal">Start Free Assessment &rarr;</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="#" class="nav-logo">
+      <span class="logo-mark">Y</span>
+      YogaVerse AI
+    </a>
+    <p>An AI-powered operating system for yoga and wellness businesses. Built around Yoga By Rachna Shah.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="#">AI Assessment</a>
+    <a href="#">Instructor Matching</a>
+    <a href="#">Wellness Coach</a>
+    <a href="#">For Instructors</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Careers</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">AI Disclaimer</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  &copy; 2026 YogaVerse AI. Wellness guidance, not medical diagnosis. Built by Kevin Cecil.
+</div>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll shadow
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Pill interaction
+document.querySelectorAll('.ap-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.ap-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
